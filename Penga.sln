@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penga.API", "Penga.API\Penga.API.csproj", "{925B5901-3912-409C-B4BA-68E5D7A5D722}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penga.API", "src\Penga.API\Penga.API.csproj", "{925B5901-3912-409C-B4BA-68E5D7A5D722}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penga.Application", "Penga.Application\Penga.Application.csproj", "{83A5E200-2D0E-484B-B027-5D695868AD3B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penga.Application", "src\Penga.Application\Penga.Application.csproj", "{83A5E200-2D0E-484B-B027-5D695868AD3B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penga.Contracts", "Penga.Contracts\Penga.Contracts.csproj", "{25B3767D-B2B1-4442-B931-DD270BDB3694}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Penga.Contracts", "src\Penga.Contracts\Penga.Contracts.csproj", "{25B3767D-B2B1-4442-B931-DD270BDB3694}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
