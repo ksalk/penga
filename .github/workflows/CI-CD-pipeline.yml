@@ -1,0 +1,28 @@
+name: Penga CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  api-ci:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up .NET 8
+      uses: actions/setup-dotnet@v1
+      with:
+        dotnet-version: '8.0.x'
+
+    - name: Restore API Nuget packages
+      run: dotnet restore src/PENGA.API/PENGA.API.csproj
+
+    - name: Build API solution
+      run: dotnet build src/PENGA.API/PENGA.API.csproj --configuration Release --no-restore
