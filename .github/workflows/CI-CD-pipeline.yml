@@ -8,7 +8,7 @@ on:
 
 jobs:
 
-  api-ci:
+  build-api:
 
     runs-on: ubuntu-latest
 
