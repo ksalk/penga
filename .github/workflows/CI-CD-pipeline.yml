@@ -7,19 +7,14 @@ on:
     branches: [ "main" ]
 
 jobs:
-
-  checkout-code:
+      
+  build-api:
     runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
-      
-  build-api:
-    needs: checkout-code
-    runs-on: ubuntu-latest
-
-    steps:
+    
     - name: Set up .NET 8
       uses: actions/setup-dotnet@v1
       with:
@@ -32,10 +27,12 @@ jobs:
       run: dotnet build Penga.sln --configuration Release --no-restore
       
   build-ui:
-    needs: checkout-code
     runs-on: ubuntu-latest
 
     steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
     - name: Set up Node 20
       uses: actions/setup-node@v4
       with:
