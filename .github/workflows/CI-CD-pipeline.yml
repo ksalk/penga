@@ -1,5 +1,9 @@
 name: Penga CI
 
+env:
+  AZURE_WEBAPP_NAME: penga-api
+  AZURE_WEBAPP_PACKAGE_PATH: '.'
+  
 on:
   push:
     branches: [ "main" ]
@@ -26,6 +30,15 @@ jobs:
     - name: Build API solution
       run: dotnet build Penga.sln --configuration Release --no-restore
       
+    - name: Publish
+      run: dotnet publish -c Release -o ${{ env.DOTNET_ROOT }}/app
+      
+    - name: Upload artifact for deployment
+      uses: actions/upload-artifact@v3
+      with:
+        name: penga-api
+        path: ${{ env.DOTNET_ROOT }}/app
+      
   build-ui:
     runs-on: ubuntu-latest
 
@@ -45,3 +58,20 @@ jobs:
     - name: Build NextJS app
       run: npm run build
       working-directory: src/penga-ui
+      
+  deploy-api:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Download artifact from build
+      uses: actions/download-artifact@v3
+      with:
+        name: penga-api
+        
+    - name: Deploy to Azure App Service
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
