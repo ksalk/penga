@@ -34,7 +34,7 @@ jobs:
       run: dotnet publish -c Release -o ${{ env.DOTNET_ROOT }}/app
       
     - name: Upload artifact for deployment
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: penga-api
         path: ${{ env.DOTNET_ROOT }}/app
@@ -65,7 +65,7 @@ jobs:
 
     steps:
     - name: Download artifact from build
-      uses: actions/download-artifact@v3
+      uses: actions/download-artifact@v4
       with:
         name: penga-api
         
