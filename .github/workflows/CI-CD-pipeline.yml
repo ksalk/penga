@@ -69,7 +69,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: penga-ui
-        path: src/penga-ui/.next
+        path: src/penga-ui/out
       
   deploy-api:
     runs-on: ubuntu-latest
