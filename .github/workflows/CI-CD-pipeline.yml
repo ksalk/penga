@@ -59,6 +59,12 @@ jobs:
       run: npm run build
       working-directory: src/penga-ui
       
+    - name: List contents
+      run: ls src/penga-ui
+      
+    - name: List contents 2
+      run: ls
+      
     - name: Upload artifact for deployment
       uses: actions/upload-artifact@v4
       with:
