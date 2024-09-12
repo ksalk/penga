@@ -63,7 +63,7 @@ jobs:
       uses: actions/upload-artifact@v4
       with:
         name: penga-ui
-        path: src/penga-ui
+        path: src/penga-ui/.next
       
   deploy-api:
     runs-on: ubuntu-latest
@@ -94,14 +94,13 @@ jobs:
         name: penga-ui
         
     - name: Deploy
-      id: builddeploy
-      uses: Azure/static-web-apps-deploy@v1
+      id: deploy
+      uses: azure/static-web-apps-deploy@v1
       with:
         azure_static_web_apps_api_token: ${{ secrets.AZURE_STATIC_WEB_APP_DEPLOY_TOKEN }}
-        repo_token: ${{ secrets.GITHUB_TOKEN }} # Used for Github integrations (i.e. PR comments)
+        repo_token: ${{ secrets.GITHUB_TOKEN }}
         action: "upload"
-        ###### Repository/Build Configurations - These values can be configured to match your app requirements. ######
-        # For more information regarding Static Web App workflow configurations, please visit: https://aka.ms/swaworkflowconfig
+        skip_app_build: true
         app_location: "." # App source code path
         api_location: "" # Api source code path - optional
-        output_location: "" # Built app content directory - optional
+        output_location: "." # Built app content directory - optional
