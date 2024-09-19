@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Penga.Application\Penga.Application.csproj" />
     <ProjectReference Include="..\Penga.Contracts\Penga.Contracts.csproj" />
+    <ProjectReference Include="..\Penga.Infrastructure\Penga.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

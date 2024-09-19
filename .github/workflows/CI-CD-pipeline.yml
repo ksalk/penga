@@ -75,6 +75,13 @@ jobs:
       uses: actions/download-artifact@v4
       with:
         name: penga-api
+
+    - name: Inject variables
+      uses: microsoft/variable-substitution@v1
+      with:
+        files: appsettings.json
+      env:
+        ConnectionStrings.PengaDb: ${{ secrets.PENGA_DB_CONNECTION_STRING }}
         
     - name: Deploy to Azure App Service
       id: deploy-to-webapp
