@@ -11,5 +11,10 @@ namespace Penga.Infrastructure
         {
             Database.EnsureCreated();
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(PengaDbContext).Assembly);
+        }
     }
 }

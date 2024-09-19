@@ -1,6 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Penga.Contracts.Features;
 using Penga.Domain;
@@ -10,7 +11,7 @@ namespace Penga.Application.Features.Costs
 {
     public class AddCostCategory
     {
-        public record Request();
+        public record Request(string name);
         public record Response();
 
         public class Validator : AbstractValidator<Request>
@@ -20,9 +21,9 @@ namespace Penga.Application.Features.Costs
 
         public class Feature : IFeatureSlice
         {
-            public static IResult Handler(PengaDbContext pengaDbContext)
+            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] Request request)
             {
-                var costCategory = new CostCategory("Apteka");
+                var costCategory = new CostCategory(request.name);
                 pengaDbContext.CostCategories.Add(costCategory);
                 pengaDbContext.SaveChanges();
 
