@@ -10,7 +10,7 @@ namespace PENGA.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var configuration =  builder.Configuration;
+            var configuration = builder.Configuration;
 
             // Add services to the container.
             builder.Services.AddAuthorization();
