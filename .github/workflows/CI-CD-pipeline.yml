@@ -1,4 +1,4 @@
-name: Penga CI
+name: Penga CI/CD
 
 env:
   AZURE_WEBAPP_NAME: penga-api
