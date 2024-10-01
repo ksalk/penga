@@ -1,6 +1,29 @@
+'use client'
+
 import Image from "next/image";
+import { useAuth } from "./auth";
 
 export default function Home() {
+  const auth = useAuth();
+
+  async function login() {
+    await auth.msalInstance.initialize();
+    await auth.msalInstance.loginPopup();
+
+    const myAccounts = auth.msalInstance.getAllAccounts();
+    auth.account = myAccounts[0];
+
+    const response = await auth.msalInstance.acquireTokenSilent({
+      account: auth.account,
+      scopes: ['api://' + process.env.NEXT_PUBLIC_ENTRA_ID_CLIENT_ID + '/access_api']
+    });
+
+    auth.token = response.accessToken;
+    auth.idToken = response.idToken;
+
+    console.log(auth);
+  }
+
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
@@ -20,7 +43,7 @@ export default function Home() {
             </code>
             .
           </li>
-          <li>Save and see your changes instantly. Lets see if CD works.</li>
+          <li>Save and see your changes instantly. Lets see if CD works. <button onClick={login}>LOGIN-LOGIN</button></li>
         </ol>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row">
