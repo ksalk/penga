@@ -1,5 +1,7 @@
 
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Web;
 using Penga.Application;
 using Penga.Infrastructure;
 
@@ -15,10 +17,21 @@ namespace PENGA.API
             // Add services to the container.
             builder.Services.AddAuthorization();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<PengaDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("PengaDb")));
+
+            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddMicrosoftIdentityWebApi(configuration.GetSection("EntraID"));
 
             var app = builder.Build();
 
@@ -33,8 +46,11 @@ namespace PENGA.API
 
             app.UseAuthorization();
 
-            FeatureRegistrar.Register(app, builder => builder.WithOpenApi());
+            app.UseCors();
 
+            FeatureRegistrar.Register(app, builder => builder
+                .WithOpenApi()
+                .RequireAuthorization());
             app.Run();
         }
     }
