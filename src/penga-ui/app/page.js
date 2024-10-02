@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import { useAuth } from "./auth";
+import { useUsersApi } from "./api/userApi";
 
 export default function Home() {
   const auth = useAuth();
+  const usersApi = useUsersApi();
 
   async function login() {
     await auth.msalInstance.initialize();
@@ -19,9 +21,9 @@ export default function Home() {
     });
 
     auth.token = response.accessToken;
-    auth.idToken = response.idToken;
-
-    console.log(auth);
+    
+    const result = await usersApi.saveUserInfo()
+    console.log(result);
   }
 
   return (

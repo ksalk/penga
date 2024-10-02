@@ -10,8 +10,7 @@ const config = {
 const data = {
     account: null,
     msalInstance: new PublicClientApplication(config),
-    token: "",
-    idToken: ""
+    token: ""
 };
 
 export function useAuth() {

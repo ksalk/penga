@@ -17,6 +17,14 @@ namespace PENGA.API
             // Add services to the container.
             builder.Services.AddAuthorization();
 
+            builder.Services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder => builder
+                    .AllowAnyOrigin()
+                    .AllowAnyHeader()
+                    .AllowAnyMethod());
+            });
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -38,10 +46,11 @@ namespace PENGA.API
 
             app.UseAuthorization();
 
+            app.UseCors();
+
             FeatureRegistrar.Register(app, builder => builder
                 .WithOpenApi()
                 .RequireAuthorization());
-
             app.Run();
         }
     }
