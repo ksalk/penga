@@ -1,6 +1,10 @@
 'use client'
 
+import React, { useState } from 'react';
+
 export default function Home() {
+  const [ userInfo, setUserInfo ] = useState();
+
   async function getUserInfo() {
     const response = await fetch('http://localhost:4280/.auth/me');
     const payload = await response.json();
@@ -9,10 +13,20 @@ export default function Home() {
   }
   
   (async () => {
-    console.log(await getUserInfo());
+    setUserInfo(await getUserInfo());
   })();
 
   return (
+    <div>
     <a href="/.auth/login/aad"><button>Login</button></a>
+        { userInfo && (
+            <div>
+              <div>Welcome</div>
+              <div>{ userInfo && userInfo.userDetails}</div>
+            </div>
+          )
+        }
+    </div>
+    
   );
 }
