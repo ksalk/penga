@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 export default function Home() {
   const [ userInfo, setUserInfo ] = useState();
@@ -12,13 +12,18 @@ export default function Home() {
     return clientPrincipal;
   }
   
-  (async () => {
-    setUserInfo(await getUserInfo());
-  })();
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      setUserInfo(await getUserInfo())
+    };
+    
+    fetchUserInfo();
+  }, []);
 
   return (
     <div>
     <a href="/.auth/login/aad"><button>Login</button></a>
+    <a href="/login"><button>Login 2</button></a>
         { userInfo && (
             <div>
               <div>Welcome</div>
