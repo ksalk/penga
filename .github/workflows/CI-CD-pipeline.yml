@@ -58,6 +58,10 @@ jobs:
     - name: Build NextJS app
       run: npm run build
       working-directory: src/penga-ui
+
+    - name: Copy staticwebapp.config.json to /out
+      run: cp ./staticwebapp.config.json ./out/staticwebapp.config.json
+      working-directory: src/penga-ui
       
     - name: Upload artifact for deployment
       uses: actions/upload-artifact@v4

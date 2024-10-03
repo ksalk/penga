@@ -6,7 +6,7 @@ export default function Home() {
   const [ userInfo, setUserInfo ] = useState();
 
   async function getUserInfo() {
-    const response = await fetch('http://localhost:4280/.auth/me');
+    const response = await fetch('/.auth/me');
     const payload = await response.json();
     const { clientPrincipal } = payload;
     return clientPrincipal;
