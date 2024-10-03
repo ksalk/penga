@@ -8,8 +8,11 @@
           }
         }
       },
-      "login": {
-        "route": "/login"
-      }
+      "routes": [
+            {
+                "route": "/",
+                "allowedRoles": ["anonymous"]
+            }
+        ]
     }
   }
