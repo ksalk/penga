@@ -5,6 +5,8 @@ env:
   AZURE_WEBAPP_PACKAGE_PATH: '.'
   
 on:
+  workflow_dispatch:
+    branches: [ "*" ]
   push:
     branches: [ "main" ]
   pull_request:
