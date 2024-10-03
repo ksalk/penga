@@ -1,0 +1,15 @@
+{
+    "auth": {
+      "identityProviders": {
+        "azureActiveDirectory": {
+          "registration": {
+            "openIdIssuer": "https://login.microsoftonline.com/{ENTRA_ID_TENANT_ID}",
+            "clientIdSettingName": "ENTRA_ID_CLIENT_ID"
+          }
+        }
+      },
+      "login": {
+        "route": "/login"
+      }
+    }
+  }
