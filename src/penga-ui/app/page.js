@@ -34,7 +34,7 @@ export default function Home() {
         <div>
           <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md" onClick={login}>Login</button>
         </div>
-      )
+        )
       }
       {account && (
         <div>
@@ -44,10 +44,8 @@ export default function Home() {
             <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md">Logout</button>
           </div>
         </div>
-      )
+        )
       }
-
-      <div>My test env var is: { process.env.NEXT_PUBLIC_TEST_VAR }</div>
     </div>
   );
 }
