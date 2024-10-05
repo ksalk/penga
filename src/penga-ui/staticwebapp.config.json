@@ -1,18 +1,13 @@
 {
     "auth": {
-      "identityProviders": {
-        "azureActiveDirectory": {
-          "registration": {
-            "openIdIssuer": "https://login.microsoftonline.com/{ENTRA_ID_TENANT_ID}",
-            "clientIdSettingName": "ENTRA_ID_CLIENT_ID"
-          }
-        }
-      },
-      "routes": [
-            {
-                "route": "/",
-                "allowedRoles": ["anonymous"]
+        "identityProviders": {
+            "azureActiveDirectory": {
+                "registration": {
+                    "openIdIssuer": "https://login.microsoftonline.com/{ENTRA_ID_TENANT_ID}",
+                    "clientIdSettingName": "ENTRA_ID_CLIENT_ID",
+                    "clientSecretSettingName": "ENTRA_ID_CLIENT_SECRET"
+                }
             }
-        ]
+        }
     }
-  }
+}
