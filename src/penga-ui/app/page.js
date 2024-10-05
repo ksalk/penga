@@ -17,7 +17,6 @@ export default function Home() {
   }, []);
 
   async function login() {
-    await auth.msalInstance.initialize();
     await auth.msalInstance.loginPopup();
 
     const myAccounts = auth.msalInstance.getAllAccounts();
