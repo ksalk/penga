@@ -6,8 +6,16 @@
                     "openIdIssuer": "https://login.microsoftonline.com/<ENTRA_ID_TENANT_ID>/v2.0",
                     "clientIdSettingName": "ENTRA_ID_CLIENT_ID",
                     "clientSecretSettingName": "ENTRA_ID_CLIENT_SECRET"
+                },
+                "login": {
+                    "loginParameters": [
+                        "tenant=<ENTRA_ID_TENANT_ID>"
+                    ]
                 }
             }
-        }
+        },
+        "allowedAudiences": [
+            "api://<ENTRA_ID_CLIENT_ID>"
+        ]
     }
 }
