@@ -62,6 +62,7 @@ jobs:
         echo "NEXT_PUBLIC_ENTRA_ID_CLIENT_ID=${{ secrets.ENTRA_ID_CLIENT_ID }}" >> .env
         echo "NEXT_PUBLIC_ENTRA_ID_TENANT_ID=${{ secrets.ENTRA_ID_TENANT_ID }}" >> .env
         echo "NEXT_PUBLIC_PENGA_API_BASE_URL=${{ secrets.PENGA_API_BASE_URL }}" >> .env
+      working-directory: src/penga-ui
     
     - name: Build NextJS app
       run: npm run build
