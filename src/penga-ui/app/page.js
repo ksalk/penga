@@ -46,6 +46,8 @@ export default function Home() {
         </div>
       )
       }
+
+      <div>My test env var is: { process.env.NEXT_PUBLIC_TEST_VAR }</div>
     </div>
   );
 }

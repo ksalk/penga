@@ -1,3 +1,5 @@
+'use client'
+
 const { PublicClientApplication } = require("@azure/msal-browser")
 
 const config = {
