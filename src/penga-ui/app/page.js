@@ -2,8 +2,7 @@
 
 import { useAuth } from "./auth";
 import { useUsersApi } from "./api/userApi";
-import { useState } from "react"
-import { useEffect } from "react/cjs/react.production.min";
+import { useState, useEffect } from "react";
 
 export default function Home() {
   const auth = useAuth();
@@ -31,7 +30,7 @@ export default function Home() {
     auth.token = response.accessToken;
     console.log(auth.account);
     console.log(response);
-    await usersApi.saveUserInfo()
+    await usersApi.saveUserInfo();
   }
 
   return (
