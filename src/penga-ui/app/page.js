@@ -3,11 +3,18 @@
 import { useAuth } from "./auth";
 import { useUsersApi } from "./api/userApi";
 import { useState } from "react"
+import { useEffect } from "react/cjs/react.production.min";
 
 export default function Home() {
   const auth = useAuth();
   const usersApi = useUsersApi();
   const [account, setAccount] = useState();
+
+  useEffect(async () => {
+    await auth.msalInstance.initialize();
+    const myAccounts = auth.msalInstance.getAllAccounts();
+    setAccount(myAccounts[0]);
+  }, []);
 
   async function login() {
     await auth.msalInstance.initialize();
