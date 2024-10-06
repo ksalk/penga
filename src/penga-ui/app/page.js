@@ -34,7 +34,7 @@ export default function Home() {
   }
 
   async function logout() {
-    await auth.msalInstance.logoutPopup();
+    await auth.msalInstance.logoutRedirect();
   }
 
   return (
