@@ -34,7 +34,9 @@ export default function Home() {
   }
 
   async function logout() {
-    await auth.msalInstance.logoutRedirect();
+    await auth.msalInstance.logoutRedirect({
+      postLogoutRedirectUri: window.location.href
+    });
   }
 
   return (
