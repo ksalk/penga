@@ -33,6 +33,10 @@ export default function Home() {
     await usersApi.saveUserInfo();
   }
 
+  async function logout() {
+    await auth.msalInstance.logoutPopup();
+  }
+
   return (
     <div>
       {!account && (
@@ -46,7 +50,7 @@ export default function Home() {
           <div>Welcome</div>
           <div>{ account.name }</div>
           <div>
-            <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md">Logout</button>
+            <button className="px-4 py-2 bg-blue-500 text-white font-semibold rounded-md" onClick={logout}>Logout</button>
           </div>
         </div>
         )
