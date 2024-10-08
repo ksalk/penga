@@ -34,9 +34,12 @@ export default function Home() {
   }
 
   async function logout() {
-    await auth.msalInstance.logoutRedirect({
-      postLogoutRedirectUri: window.location.href
+    await auth.msalInstance.logoutPopup({
+      account: account,
+      postLogoutRedirectUri: window.location.href,
+      mainWindowRedirectUri: window.location.href
     });
+    console.log("Logged out...");
   }
 
   return (
