@@ -9,10 +9,14 @@ export default function Home() {
   const usersApi = useUsersApi();
   const [account, setAccount] = useState();
 
-  useEffect(async () => {
-    await auth.msalInstance.initialize();
-    const myAccounts = auth.msalInstance.getAllAccounts();
-    setAccount(myAccounts[0]);
+  useEffect(() => {
+    const fetchUserInfo = async () => {
+      await auth.msalInstance.initialize();
+      const myAccounts = auth.msalInstance.getAllAccounts();
+      setAccount(myAccounts[0]);
+    }
+    
+    fetchUserInfo();
   }, []);
 
   async function login() {
