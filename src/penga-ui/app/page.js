@@ -5,7 +5,6 @@ import { useUsersApi } from "./api/userApi";
 
 export default function Home() {
   const { authData, login, logout } = useAuth();
-  const usersApi = useUsersApi();
 
   return (
     <div>
