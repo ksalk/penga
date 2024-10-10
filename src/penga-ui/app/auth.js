@@ -19,7 +19,7 @@ const config = {
 
 // For now I'm just storing access token in localStorage
 // If I find better approach I'll change it in the future
-export const useAuth2 = () => {
+export const useAuth = () => {
     const [authData, setAuthData] = useState(null);
 
     const msalInstance = new PublicClientApplication(config);
