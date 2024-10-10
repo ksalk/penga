@@ -2,7 +2,6 @@
 
 import { useAuth } from "./auth";
 import { useUsersApi } from "./api/userApi";
-import { useAuth } from "./auth";
 
 export default function Home() {
   const { authData, login, logout } = useAuth();
