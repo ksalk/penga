@@ -4,16 +4,15 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Penga.Contracts.Features;
-using Penga.Domain;
 using Penga.Infrastructure;
 
 namespace Penga.Application.Features.Costs
 {
-    public class AddCost
+    public class RemoveCost
     {
-        public record AddCostRequest(string Name, string Description, DateOnly? Date, decimal Amount, int? CostCategoryId);
+        public record RemoveCostRequest(int Id);
 
-        public class Validator : AbstractValidator<AddCostRequest>
+        public class Validator : AbstractValidator<RemoveCostRequest>
         {
 
         }
@@ -21,18 +20,22 @@ namespace Penga.Application.Features.Costs
         public class Feature : IFeatureSlice
         {
 
-            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] AddCostRequest request)
+            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] RemoveCostRequest request)
             {
-                var cost = new Cost(request.Name, request.Description, request.Date, request.Amount, request.CostCategoryId);
-                pengaDbContext.Costs.Add(cost);
+                var cost = pengaDbContext.Costs.Find(request.Id);
+                if (cost == null)
+                {
+                    return Results.NotFound($"Cost with id = {request.Id} not found");
+                }
+                pengaDbContext.Costs.Remove(cost);
                 pengaDbContext.SaveChanges();
                 return Results.Ok();
             }
 
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
             {
-                return routeBuilder.MapPost("/cost", Handler)
-                    .WithName("AddCost")
+                return routeBuilder.MapDelete("/cost", Handler)
+                    .WithName("RemoveCost")
                     .WithTags("Costs");
             }
         }

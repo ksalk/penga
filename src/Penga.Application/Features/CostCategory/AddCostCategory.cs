@@ -12,7 +12,6 @@ namespace Penga.Application.Features.Costs
     public class AddCostCategory
     {
         public record AddCostCategoryRequest(string name);
-        public record AddCostCategoryResponse();
 
         public class Validator : AbstractValidator<AddCostCategoryRequest>
         {

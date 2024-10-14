@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Penga.Contracts.Features;
-using Penga.Domain;
 using Penga.Infrastructure;
 
 namespace Penga.Application.Features.Costs
@@ -12,7 +11,6 @@ namespace Penga.Application.Features.Costs
     public class UpdateCostCategory
     {
         public record UpdateCostCategoryRequest(int Id, string Name);
-        public record UpdateCostCategoryResponse();
 
         public class Validator : AbstractValidator<UpdateCostCategoryRequest>
         {

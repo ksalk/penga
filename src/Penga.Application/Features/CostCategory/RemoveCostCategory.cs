@@ -11,7 +11,6 @@ namespace Penga.Application.Features.Costs
     public class RemoveCostCategory
     {
         public record RemoveCostCategoryRequest(int Id);
-        public record RemoveCostCategoryResponse();
 
         public class Validator : AbstractValidator<RemoveCostCategoryRequest>
         {
