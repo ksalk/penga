@@ -11,23 +11,23 @@ namespace Penga.Application.Features.Costs
 {
     public class AddCostCategory
     {
-        public record Request(string name);
-        public record Response();
+        public record AddCostCategoryRequest(string name);
+        public record AddCostCategoryResponse();
 
-        public class Validator : AbstractValidator<Request>
+        public class Validator : AbstractValidator<AddCostCategoryRequest>
         {
 
         }
 
         public class Feature : IFeatureSlice
         {
-            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] Request request)
+            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] AddCostCategoryRequest request)
             {
                 var costCategory = new CostCategory(request.name);
                 pengaDbContext.CostCategories.Add(costCategory);
                 pengaDbContext.SaveChanges();
 
-                return Results.Ok("Success");
+                return Results.Ok();
             }
 
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
