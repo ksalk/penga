@@ -12,7 +12,6 @@ namespace Penga.Application.Features.Costs
     public class AddCostCategory
     {
         public record AddCostCategoryRequest(string name);
-        public record AddCostCategoryResponse();
 
         public class Validator : AbstractValidator<AddCostCategoryRequest>
         {
@@ -33,7 +32,8 @@ namespace Penga.Application.Features.Costs
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
             {
                 return routeBuilder.MapPost("/cost-category", Handler)
-                    .WithName("AddCostCategory");
+                    .WithName("AddCostCategory")
+                    .WithTags("Cost Categories");
             }
         }
     }

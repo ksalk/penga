@@ -11,7 +11,6 @@ namespace Penga.Application.Features.Costs
     public class RemoveCostCategory
     {
         public record RemoveCostCategoryRequest(int Id);
-        public record RemoveCostCategoryResponse();
 
         public class Validator : AbstractValidator<RemoveCostCategoryRequest>
         {
@@ -37,7 +36,8 @@ namespace Penga.Application.Features.Costs
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
             {
                 return routeBuilder.MapDelete("/cost-category", Handler)
-                    .WithName("RemoveCostCategory");
+                    .WithName("RemoveCostCategory")
+                    .WithTags("Cost Categories");
             }
         }
     }
