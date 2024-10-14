@@ -34,7 +34,8 @@ namespace Penga.Application.Features.Costs
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
             {
                 return routeBuilder.MapPost("/user", Handler)
-                    .WithName("SaveUserInfo");
+                    .WithName("SaveUserInfo")
+                    .WithTags("Users");
             }
         }
     }

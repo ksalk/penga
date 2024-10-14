@@ -25,7 +25,8 @@ namespace Penga.Application.Features.Costs
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
             {
                 return routeBuilder.MapGet("/cost-category", Handler)
-                    .WithName("GetCostCategories");
+                    .WithName("GetCostCategories")
+                    .WithTags("Cost Categories");
             }
         }
     }

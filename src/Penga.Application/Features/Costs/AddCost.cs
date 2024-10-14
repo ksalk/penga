@@ -33,7 +33,8 @@ namespace Penga.Application.Features.Costs
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
             {
                 return routeBuilder.MapPost("/cost", Handler)
-                    .WithName("AddCost");
+                    .WithName("AddCost")
+                    .WithTags("Costs");
             }
         }
     }
