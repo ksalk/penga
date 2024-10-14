@@ -27,7 +27,7 @@ namespace Penga.Application.Features.Costs
 
             public static IResult Handler()
             {
-                return Results.Ok("Success");
+                return Results.Ok();
             }
 
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)

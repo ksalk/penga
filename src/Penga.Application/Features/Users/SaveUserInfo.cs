@@ -28,7 +28,7 @@ namespace Penga.Application.Features.Costs
                 var email = httpContext.User.FindFirst(ClaimTypes.Email)?.Value;
                 var name = httpContext.User.FindFirst(ClaimTypes.Name)?.Value;
 
-                return Results.Ok("Success");
+                return Results.Ok();
             }
 
             public IEndpointConventionBuilder Register(IEndpointRouteBuilder routeBuilder)
