@@ -3,8 +3,10 @@
 import Link from "next/link"
 import {
   Menu,
+  MoonIcon,
   Package2,
   Search,
+  SunIcon,
 } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
@@ -12,9 +14,11 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { useAuth } from "@/app/auth"
+import { useTheme } from "next-themes"
 
 export function NavBar({ children, ...props }) {
     const { authData, login, logout } = useAuth();
+    const { setTheme } = useTheme();
 
     return <header className="sticky top-0 flex h-16 items-center gap-4 border-b bg-background px-4 md:px-6">
         <nav className="hidden flex-col gap-6 text-lg font-medium md:flex md:flex-row md:items-center md:gap-5 md:text-sm lg:gap-6">
@@ -106,6 +110,10 @@ export function NavBar({ children, ...props }) {
                     </>
                 )
             }
+            <Button variant="outline" size="icon">
+                <SunIcon onClick={() => setTheme("dark")} className="h-[1.2rem] w-[1.2rem] rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+                <MoonIcon onClick={() => setTheme("light")} className="absolute h-[1.2rem] w-[1.2rem] rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+            </Button>
         </div>
     </header>
 }
