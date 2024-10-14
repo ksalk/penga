@@ -6,6 +6,7 @@ namespace Penga.Infrastructure
     public class PengaDbContext : DbContext
     {
         public DbSet<CostCategory> CostCategories { get; set; }
+        public DbSet<Cost> Costs { get; set; }
 
         public PengaDbContext(DbContextOptions<PengaDbContext> options) : base(options)
         {
