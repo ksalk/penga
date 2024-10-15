@@ -1,9 +1,12 @@
 
+using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
 using Penga.Application;
+using Penga.Application.Features.Costs;
 using Penga.Infrastructure;
+using System.Globalization;
 
 namespace PENGA.API
 {
@@ -32,6 +35,9 @@ namespace PENGA.API
 
             builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(configuration.GetSection("EntraID"));
+
+            builder.Services.AddValidatorsFromAssemblyContaining<AddCostCategory>();
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en");
 
             var app = builder.Build();
 

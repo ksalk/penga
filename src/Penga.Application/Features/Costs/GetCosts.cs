@@ -11,10 +11,8 @@ namespace Penga.Application.Features.Costs
     {
         public record GetCostsResponse(int Id, string Name);
 
-
         public class Feature : IFeatureSlice
         {
-
             public static IResult Handler(PengaDbContext pengaDbContext)
             {
                 var costs = pengaDbContext.Costs

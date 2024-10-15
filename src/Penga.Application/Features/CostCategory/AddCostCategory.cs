@@ -11,18 +11,29 @@ namespace Penga.Application.Features.Costs
 {
     public class AddCostCategory
     {
-        public record AddCostCategoryRequest(string name);
+        public record AddCostCategoryRequest(string Name);
 
         public class Validator : AbstractValidator<AddCostCategoryRequest>
         {
-
+            public Validator()
+            {
+                RuleFor(x => x.Name)
+                    .NotEmpty()
+                    .MaximumLength(100);
+            }
         }
 
         public class Feature : IFeatureSlice
         {
-            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] AddCostCategoryRequest request)
+            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] AddCostCategoryRequest request, IValidator<AddCostCategoryRequest> validator)
             {
-                var costCategory = new CostCategory(request.name);
+                var validationResult = validator.Validate(request);
+                if (!validationResult.IsValid)
+                {
+                    return Results.BadRequest(validationResult);
+                }
+
+                var costCategory = new CostCategory(request.Name);
                 await pengaDbContext.CostCategories.AddAsync(costCategory);
                 await pengaDbContext.SaveChangesAsync();
 

@@ -15,14 +15,27 @@ namespace Penga.Application.Features.Costs
 
         public class Validator : AbstractValidator<AddCostRequest>
         {
+            public Validator()
+            {
+                RuleFor(x => x.Name)
+                    .NotEmpty()
+                    .MaximumLength(100);
 
+                RuleFor(x => x.Amount)
+                    .GreaterThan(0);
+            }
         }
 
         public class Feature : IFeatureSlice
         {
-
-            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] AddCostRequest request)
+            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] AddCostRequest request, IValidator<AddCostRequest> validator)
             {
+                var validationResult = validator.Validate(request);
+                if (!validationResult.IsValid)
+                {
+                    return Results.BadRequest(validationResult);
+                }
+
                 var cost = new Cost(request.Name, request.Description, request.Date, request.Amount, request.CostCategoryId);
                 await pengaDbContext.Costs.AddAsync(cost);
                 await pengaDbContext.SaveChangesAsync();

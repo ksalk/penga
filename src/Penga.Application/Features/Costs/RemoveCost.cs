@@ -12,14 +12,8 @@ namespace Penga.Application.Features.Costs
     {
         public record RemoveCostRequest(int Id);
 
-        public class Validator : AbstractValidator<RemoveCostRequest>
-        {
-
-        }
-
         public class Feature : IFeatureSlice
         {
-
             public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] RemoveCostRequest request)
             {
                 var cost = pengaDbContext.Costs.Find(request.Id);
