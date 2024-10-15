@@ -20,11 +20,11 @@ namespace Penga.Application.Features.Costs
 
         public class Feature : IFeatureSlice
         {
-            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] AddCostCategoryRequest request)
+            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] AddCostCategoryRequest request)
             {
                 var costCategory = new CostCategory(request.name);
-                pengaDbContext.CostCategories.Add(costCategory);
-                pengaDbContext.SaveChanges();
+                await pengaDbContext.CostCategories.AddAsync(costCategory);
+                await pengaDbContext.SaveChangesAsync();
 
                 return Results.Ok();
             }

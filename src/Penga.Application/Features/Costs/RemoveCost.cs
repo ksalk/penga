@@ -20,7 +20,7 @@ namespace Penga.Application.Features.Costs
         public class Feature : IFeatureSlice
         {
 
-            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] RemoveCostRequest request)
+            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] RemoveCostRequest request)
             {
                 var cost = pengaDbContext.Costs.Find(request.Id);
                 if (cost == null)
@@ -28,7 +28,7 @@ namespace Penga.Application.Features.Costs
                     return Results.NotFound($"Cost with id = {request.Id} not found");
                 }
                 pengaDbContext.Costs.Remove(cost);
-                pengaDbContext.SaveChanges();
+                await pengaDbContext.SaveChangesAsync();
                 return Results.Ok();
             }
 

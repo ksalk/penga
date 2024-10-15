@@ -19,7 +19,7 @@ namespace Penga.Application.Features.Costs
 
         public class Feature : IFeatureSlice
         {
-            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] UpdateCostCategoryRequest request)
+            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] UpdateCostCategoryRequest request)
             {
                 var costCategory = pengaDbContext.CostCategories.Find(request.Id);
                 if (costCategory == null)
@@ -28,7 +28,7 @@ namespace Penga.Application.Features.Costs
                 }
 
                 costCategory.UpdateName(request.Name);
-                pengaDbContext.SaveChanges();
+                await pengaDbContext.SaveChangesAsync();
 
                 return Results.Ok();
             }
