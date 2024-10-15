@@ -14,13 +14,24 @@ namespace Penga.Application.Features.Costs
 
         public class Validator : AbstractValidator<UpdateCostCategoryRequest>
         {
-
+            public Validator()
+            {
+                RuleFor(x => x.Name)
+                    .NotEmpty()
+                    .MaximumLength(100);
+            }
         }
 
         public class Feature : IFeatureSlice
         {
-            public static IResult Handler(PengaDbContext pengaDbContext, [FromBody] UpdateCostCategoryRequest request)
+            public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] UpdateCostCategoryRequest request, IValidator<UpdateCostCategoryRequest> validator)
             {
+                var validationResult = validator.Validate(request);
+                if (!validationResult.IsValid)
+                {
+                    return Results.BadRequest(validationResult);
+                }
+
                 var costCategory = pengaDbContext.CostCategories.Find(request.Id);
                 if (costCategory == null)
                 {
@@ -28,7 +39,7 @@ namespace Penga.Application.Features.Costs
                 }
 
                 costCategory.UpdateName(request.Name);
-                pengaDbContext.SaveChanges();
+                await pengaDbContext.SaveChangesAsync();
 
                 return Results.Ok();
             }
