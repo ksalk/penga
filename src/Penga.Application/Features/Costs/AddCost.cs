@@ -30,11 +30,7 @@ namespace Penga.Application.Features.Costs
         {
             public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] AddCostRequest request, IValidator<AddCostRequest> validator)
             {
-                var validationResult = validator.Validate(request);
-                if (!validationResult.IsValid)
-                {
-                    return Results.BadRequest(validationResult);
-                }
+                validator.ValidateAndThrow(request);
 
                 var cost = new Cost(request.Name, request.Description, request.Date, request.Amount, request.CostCategoryId);
                 await pengaDbContext.Costs.AddAsync(cost);

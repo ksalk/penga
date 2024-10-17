@@ -30,11 +30,7 @@ namespace Penga.Application.Features.Costs
 
             public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] UpdateCostRequest request, IValidator<UpdateCostRequest> validator)
             {
-                var validationResult = validator.Validate(request);
-                if (!validationResult.IsValid)
-                {
-                    return Results.BadRequest(validationResult);
-                }
+                validator.ValidateAndThrow(request);
 
                 var cost = pengaDbContext.Costs.Find(request.Id);
                 if (cost == null)
