@@ -22,6 +22,10 @@ namespace Penga.Infrastructure.EntityConfigurations
             builder.Property(e => e.Amount)
                 .HasColumnType("decimal(18,2)")
                 .IsRequired();
+
+            builder.HasOne(e => e.CostCategory)
+                .WithMany()
+                .HasForeignKey(e => e.CostCategoryId);
         }
     }
 }
