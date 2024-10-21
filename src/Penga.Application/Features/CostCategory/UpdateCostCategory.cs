@@ -26,11 +26,7 @@ namespace Penga.Application.Features.Costs
         {
             public static async Task<IResult> Handler(PengaDbContext pengaDbContext, [FromBody] UpdateCostCategoryRequest request, IValidator<UpdateCostCategoryRequest> validator)
             {
-                var validationResult = validator.Validate(request);
-                if (!validationResult.IsValid)
-                {
-                    return Results.BadRequest(validationResult);
-                }
+                validator.ValidateAndThrow(request);
 
                 var costCategory = pengaDbContext.CostCategories.Find(request.Id);
                 if (costCategory == null)

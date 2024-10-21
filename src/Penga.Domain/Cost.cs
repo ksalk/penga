@@ -8,6 +8,7 @@
         public DateOnly? Date { get; set; }
         public decimal Amount { get; set; }
         public int? CostCategoryId { get; set; }
+        public CostCategory CostCategory { get; set; }
 
         public Cost(string name, string description, DateOnly? date, decimal amount, int? costCategoryId)
         {

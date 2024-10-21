@@ -3,6 +3,7 @@ using FluentValidation;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Web;
+using Penga.API.Middlewares;
 using Penga.Application;
 using Penga.Application.Features.Costs;
 using Penga.Infrastructure;
@@ -40,6 +41,8 @@ namespace PENGA.API
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en");
 
             var app = builder.Build();
+
+            app.UseMiddleware<ExceptionMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
