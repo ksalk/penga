@@ -34,8 +34,11 @@ namespace PENGA.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<PengaDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("PengaDb")));
 
-            builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
-                .AddMicrosoftIdentityWebApi(configuration.GetSection("EntraID"));
+            if (!builder.Environment.IsDevelopment())
+            {
+                builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                    .AddMicrosoftIdentityWebApi(configuration.GetSection("EntraID"));
+            }
 
             builder.Services.AddValidatorsFromAssemblyContaining<AddCostCategory>();
             ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en");
@@ -57,9 +60,19 @@ namespace PENGA.API
 
             app.UseCors();
 
-            FeatureRegistrar.Register(app, builder => builder
-                .WithOpenApi()
-                .RequireAuthorization());
+            FeatureRegistrar.Register(app, builder =>
+            {
+                if (app.Environment.IsDevelopment())
+                {
+                    builder.WithOpenApi();
+                }
+                else
+                {
+                    builder
+                    .WithOpenApi()
+                    .RequireAuthorization();
+                }
+            });
             app.Run();
         }
     }
