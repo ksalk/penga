@@ -34,7 +34,8 @@ namespace PENGA.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddDbContext<PengaDbContext>(options => options.UseSqlServer(configuration.GetConnectionString("PengaDb")));
 
-            if (!builder.Environment.IsDevelopment())
+            var useAuthorization = !builder.Environment.IsDevelopment();
+            if (useAuthorization)
             {
                 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                     .AddMicrosoftIdentityWebApi(configuration.GetSection("EntraID"));
@@ -62,16 +63,17 @@ namespace PENGA.API
 
             FeatureRegistrar.Register(app, builder =>
             {
-                if (app.Environment.IsDevelopment())
+                if (useAuthorization)
                 {
-                    builder.WithOpenApi();
+                    builder
+                        .WithOpenApi()
+                        .RequireAuthorization();
                 }
                 else
                 {
                     builder
-                    .WithOpenApi()
-                    .RequireAuthorization();
-                }
+                        .WithOpenApi();
+                }                
             });
             app.Run();
         }
